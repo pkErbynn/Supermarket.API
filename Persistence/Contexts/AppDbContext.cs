@@ -6,8 +6,8 @@ namespace Supermarket.API.Persistence.Contexts
     public class AppDbContext : DbContext
     {
         // property sets maping models to database tables
-        public DbSet<Category> Categories { get; set;}
-        public DbSet<Product> Products { get; set;}
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<Product> Products { get; set; }
 
         // passing database configuration to base class through dependency injection
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
@@ -21,10 +21,16 @@ namespace Supermarket.API.Persistence.Contexts
             base.OnModelCreating(builder);
 
             builder.Entity<Category>().ToTable("Categories");
+            // primary key
             builder.Entity<Category>().HasKey(p => p.Id);
+            // table columns and constraints 
             builder.Entity<Category>().Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
             builder.Entity<Category>().Property(p => p.Name).IsRequired().HasMaxLength(30);
-            builder.Entity<Category>().HasMany(p => p.Products).WithOne(p => p.Category).HasForeignKey(p => p.CategoryId);
+            // relationship between tables
+            builder.Entity<Category>()
+                .HasMany(p => p.Products)
+                .WithOne(p => p.Category)
+                .HasForeignKey(p => p.CategoryId);
 
             builder.Entity<Category>().HasData(
                 new Category { Id = 100, Name = "Fruits and Vegetables" },
