@@ -19,5 +19,7 @@ namespace Supermarket.API.Services
         {
             return await _categoryRepository.ListAsync();
         }
+
+        
     }
 }

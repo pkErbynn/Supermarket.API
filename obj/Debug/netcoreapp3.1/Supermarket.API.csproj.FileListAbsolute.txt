@@ -51,3 +51,5 @@
 /home/pkerbynn/dev/TURNTABL/learn-dash/src/Supermarket.API/obj/Debug/netcoreapp3.1/staticwebassets/Supermarket.API.StaticWebAssets.xml
 /home/pkerbynn/dev/TURNTABL/learn-dash/src/Supermarket.API/obj/Debug/netcoreapp3.1/Supermarket.API.dll
 /home/pkerbynn/dev/TURNTABL/learn-dash/src/Supermarket.API/obj/Debug/netcoreapp3.1/Supermarket.API.pdb
+/home/pkerbynn/dev/TURNTABL/learn-dash/src/Supermarket.API/bin/Debug/netcoreapp3.1/AutoMapper.dll
+/home/pkerbynn/dev/TURNTABL/learn-dash/src/Supermarket.API/bin/Debug/netcoreapp3.1/AutoMapper.Extensions.Microsoft.DependencyInjection.dll
