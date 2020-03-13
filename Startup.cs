@@ -10,6 +10,13 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Supermarket.API.Persistence.Contexts;
+using Supermarket.API.Domain.Repositories;
+using Supermarket.API.Domain.Services;
+using Supermarket.API.Persistence.Repositories;
+using Supermarket.API.Services;
+using Microsoft.EntityFrameworkCore;
+
 
 namespace Supermarket.API
 {
@@ -26,7 +33,17 @@ namespace Supermarket.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddMvc(option => option.EnableEndpointRouting = false).SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
+            services.AddDbContext<AppDbContext>(options =>
+            {
+                options.UseInMemoryDatabase("supermarket-api-in-memory");
+            });
+
+            services.AddScoped<ICategoryRepository, CategoryRepository>();
+            services.AddScoped<ICategoryService, CategoryService>();
+
         }
+
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -35,7 +52,12 @@ namespace Supermarket.API
             {
                 app.UseDeveloperExceptionPage();
             }
+            // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+            else
+            {
+                app.UseHsts();
 
+            }
             app.UseHttpsRedirection();
 
             app.UseRouting();
@@ -46,6 +68,7 @@ namespace Supermarket.API
             {
                 endpoints.MapControllers();
             });
+            app.UseMvc();
         }
     }
 }
