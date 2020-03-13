@@ -5,7 +5,7 @@ using Supermarket.API.Domain.Models;
 using System.Threading.Tasks;
 using AutoMapper;
 using Supermarket.API.Resources;
-
+using Supermarket.API.Extensions;
 
 namespace Supermarket.API.Controllers
 {
@@ -35,7 +35,8 @@ namespace Supermarket.API.Controllers
         [HttpPost]
         public async Task<IActionResult> PostAsync([FromBody] SaveCategoryResource resource)
         {
-            if(ModelState.IsValid){
+            if (ModelState.IsValid)
+            {
                 return BadRequest(ModelState.GetErrorMessages());
             }
         }
